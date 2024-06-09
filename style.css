@@ -1,78 +1,124 @@
 body {
-  padding: 5rem;
+  background: #313433;
   font-family: sans-serif;
 }
-.container{
-  width: min(400px, 90%);
-}
-#passwordInput {
-  width: 100%;
+
+.container {
   display: flex;
-  position: relative;
-}
-#passwordInput input[type="password"],
-#passwordInput input[type="text"] {
-  width: 100%;
-  padding: 10px;
-  outline: none;
-  border: 1px solid lightgrey;
-  font-size: 15px;
+  background-color: rgb(253, 253, 252);
+  flex-direction: column;
+  text-align: center;
+  width: 30%;
+  border-radius: 15px;
+  margin: 5rem auto;
+  padding-bottom: 1%;
 }
 
-#passwordInput #showHide {
-  font-size: 12px;
-  font-weight: 600;
-  position: absolute;
-  color: red;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
+.slider {
+  -webkit-appearance: none;
+  width: 70%;
+  height: 10px;
+  background: #f7be04;
+  border-radius: 15px;
+  opacity: 1;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+  margin-left: 55px;
+  margin-top: 25px;
+  margin-bottom: 20px;
+}
+
+.slider:hover {
+  opacity: 0.5;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  background: #000000;
+  border-radius: 50%;
   cursor: pointer;
-  user-select: none;
 }
-#passwordStrength {
-  width: 100%;
-  height: 5px;
-  margin: 10px 0;
-  display: none;
+
+.action-btn {
+  background-color: #000;
+  border: 0;
+  color: #f7be04;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 10px;
+  margin: 10px 20px;
+  border-radius: 15px;
+  opacity: 1;
+  transition: opacity 0.2s;
 }
-#passwordStrength span {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  background: lightgrey;
-  border-radius: 5px;
+
+lable {
+  display: inline;
 }
-#passwordStrength span:nth-child(2) {
-  margin: 0 3px;
+
+.action-btn:hover {
+  opacity: 0.5;
 }
-#passwordStrength span.active:before {
-  position: absolute;
-  content: "";
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  border-radius: 5px;
+
+.slider_main {
+  display: flex;
+  flex-direction: row;
 }
-#passwordStrength span#poor:before {
-  background-color: #ff4757;
+
+input[type="checkbox"] {
+  accent-color: #f7be04;
 }
-#passwordStrength span#weak:before {
-  background-color: orange;
+
+.output {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  gap: 4px;
 }
-#passwordStrength span#strong:before {
-  background-color: #23ad5c;
+
+.clipboard {
+  cursor: pointer;
+  border: 0;
+  background-color: white;
+  color: black;
+  border-radius: 15px;
+  font-size: 23px;
+  opacity: 1;
+  transition: opacity 0.2s;
 }
-#passwordInfo {
-  font-size: 15px;
+
+.clipboard:hover {
+  opacity: 0.5;
 }
-#passwordInfo #poor {
-  color: red;
+
+#pwd_txt {
+  min-width: 8rem;
+  min-height: 1rem;
+  width: fit-content;
+  background: #f7be045c;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px dashed black;
 }
-#passwordInfo #weak {
-  color: orange;
+
+#pwd_txt span {
+  color: rgb(97, 97, 97);
 }
-#passwordInfo #strong {
-  color: green;
+
+#copy_text {
+  color: #434242;
+}
+
+@media (max-width: 800px) and (min-width: 500px) {
+  .container {
+    width: 65%;
+  }
+}
+
+@media (max-width: 499px) {
+  .container {
+    width: 98%;
+  }
 }
