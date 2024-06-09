@@ -1,30 +1,120 @@
-const LowercaseChars "abcdefghijklmnopqrstuvwxyz";
+let passwordInput = document.querySelector(
+  '#passwordInput input[type="password"]'
+);
+let passwordStrength = document.getElementById("passwordStrength");
+let poor = document.querySelector("#passwordStrength #poor");
+let weak = document.querySelector("#passwordStrength #weak");
+let strong = document.querySelector("#passwordStrength #strong");
+let passwordInfo = document.getElementById("passwordInfo");
 
-const uppercaseChars "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; const numberChars "0123456789";
+let poorRegExp = /[a-z]/;
+let weakRegExp = /(?=.*?[0-9])/;
+let strongRegExp = /(?=.*?[#?!@$%^&*-])/;
+let whitespaceRegExp = /^$|\s+/;
 
-const symbolchars "1-S^+";
+passwordInput.oninput = function () {
+  let passwordValue = passwordInput.value;
+  let passwordLength = passwordValue.length;
 
-const spaceChar
+  let poorPassword = passwordValue.match(poorRegExp);
+  let weakPassword = passwordValue.match(weakRegExp);
+  let strongPassword = passwordValue.match(strongRegExp);
+  let whitespace = passwordValue.match(whitespaceRegExp);
 
-function getRandomChar(chars) {
+  if (passwordValue != "") {
+    passwordStrength.style.display = "block";
+    passwordStrength.style.display = "flex";
+    passwordInfo.style.display = "block";
+    passwordInfo.style.color = "black";
 
-const index Math.floor(Math.random() chars.length);
+    if (whitespace) {
+      passwordInfo.textContent = "Whitespaces are not allowed";
+    } else {
+      poorPasswordStrength(
+        passwordLength,
+        poorPassword,
+        weakPassword,
+        strongPassword
+      );
+      weakPasswordStrength(
+        passwordLength,
+        poorPassword,
+        weakPassword,
+        strongPassword
+      );
+      strongPasswordStrength(
+        passwordLength,
+        poorPassword,
+        weakPassword,
+        strongPassword
+      );
+    }
+  } else {
+    passwordStrength.style.display = "none";
+    passwordInfo.style.display = "none";
+  }
+};
 
-return chars [index];
+function poorPasswordStrength(
+  passwordLength,
+  poorPassword,
+  weakPassword,
+  strongPassword
+) {
+  if (passwordLength <= 3 && (poorPassword || weakPassword || strongPassword)) {
+    poor.classList.add("active");
+    passwordInfo.style.display = "block";
+    passwordInfo.style.color = "red";
+    passwordInfo.textContent = "Your password is poor";
+  }
+}
 
-function generate Passworα() {
+function weakPasswordStrength(
+  passwordLength,
+  poorPassword,
+  weakPassword,
+  strongPassword
+) {
+  if (passwordLength >= 4 && poorPassword && (weakPassword || strongPassword)) {
+    weak.classList.add("active");
+    passwordInfo.textContent = "Your password is Weak";
+    passwordInfo.style.color = "orange";
+  } else {
+    weak.classList.remove("active");
+  }
+}
 
-const passwordInput document.getElementById("password");
+function strongPasswordStrength(
+  passwordLength,
+  poorPassword,
+  weakPassword,
+  strongPassword
+) {
+  if (passwordLength >= 6 && poorPassword && weakPassword && strongPassword) {
+    poor.classList.add("active");
+    weak.classList.add("active");
+    strong.classList.add("active");
+    passwordInfo.textContent = "Your password is strong";
+    passwordInfo.style.color = "green";
+  } else {
+    strong.classList.remove("active");
+  }
+}
 
-const lowercaseCheckbox document.getElementById("lowercase");
+let showHide = document.querySelector("#passwordInput #showHide");
 
-const uppercaseCheckbox document.getElementById("uppercase"); const numbersCheckbox document.getElementById("numbers");
+showHide.onclick = function () {
+  showHidePassword();
+};
 
-const symbolsCheckbox document.getElementById("symbols");
-
-const exclude DuplicateCheckbox document.getElementById("exc-duplicate");
-
-const spacesCheckbox document.getElementById("spaces");
-
-If next slide
+function showHidePassword() {
+  if (passwordInput.type == "password") {
+    passwordInput.type = "text";
+    showHide.textContent = "HIDE";
+    showHide.style.color = "green";
+  } else {
+    passwordInput.type = "password";
+    showHide.textContent = "SHOW";
+    showHide.style.color = "red";
+  }
 }
